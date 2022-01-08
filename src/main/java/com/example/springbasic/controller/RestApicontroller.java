@@ -1,5 +1,7 @@
 package com.example.springbasic.controller;
 
+import com.example.springbasic.aop.annotation.Decode;
+import com.example.springbasic.aop.annotation.Timer;
 import com.example.springbasic.dto.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,21 @@ public class RestApicontroller {
     @PostMapping("/post")
     public User post(@RequestBody User user) {
         System.out.println("post method : " + user);
+        return user;
+    }
+
+    @Timer
+    @DeleteMapping("/delete")
+    public void delete() throws InterruptedException {
+        // db logic
+        Thread.sleep(1000 * 2);
+    }
+
+    @Decode
+    @PutMapping("/put")
+    public User put(@RequestBody User user) {
+        System.out.println("put");
+        System.out.println("user : " + user);
         return user;
     }
 }

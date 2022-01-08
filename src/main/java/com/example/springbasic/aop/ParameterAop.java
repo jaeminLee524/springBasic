@@ -20,7 +20,7 @@ public class ParameterAop {
     private void pointCut() {
     }
 
-    @Before("pointCut()")
+/*    @Before("pointCut()")
     public void before(JoinPoint joinPoint) { //JoinPoint 들어가는 지점에 가지고 있는 객체
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
@@ -37,6 +37,6 @@ public class ParameterAop {
     public void afterReturn(JoinPoint joinPoint, Object returnObj) {
         System.out.println("return obj");
         System.out.println("returnObj = " + returnObj);
-    }
+    }*/
 
 }
