@@ -36,7 +36,7 @@ public class GetApiController {
 
     // 객체로 받을때는 @queryParam 명시하지 않음
     // spring이 객체가 들어오면 queryParameter에 있는 주소 ?~~~~를 판단하여 key에 해당하는 객체와 매칭해줌
-    @GetMapping("query-param2")
+    @GetMapping("/query-param2")
     public String queryParam03(UserRequest userRequest) {
 
         System.out.println(userRequest.getName());
@@ -45,4 +45,6 @@ public class GetApiController {
 
         return userRequest.toString();
     }
+
+
 }
