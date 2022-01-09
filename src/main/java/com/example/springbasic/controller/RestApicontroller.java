@@ -3,7 +3,13 @@ package com.example.springbasic.controller;
 import com.example.springbasic.aop.annotation.Decode;
 import com.example.springbasic.aop.annotation.Timer;
 import com.example.springbasic.dto.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/aop")
@@ -32,9 +38,19 @@ public class RestApicontroller {
 
     @Decode
     @PutMapping("/put")
-    public User put(@RequestBody User user) {
-        System.out.println("put");
-        System.out.println("user : " + user);
-        return user;
+    public ResponseEntity put(@Valid @RequestBody User user, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            bindingResult.getAllErrors().forEach(objectError -> {
+                FieldError fieldError = (FieldError) objectError;
+                String message = objectError.getDefaultMessage();
+
+                sb.append("field" + fieldError.getField());
+                sb.append("message" + message);
+            });
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
+        }
+        return ResponseEntity.ok(user);
     }
 }

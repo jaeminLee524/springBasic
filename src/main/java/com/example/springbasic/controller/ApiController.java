@@ -19,6 +19,16 @@ public class ApiController {
 
     @PutMapping("/put")
     public ResponseEntity<User> put(@RequestBody User user) {
-         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    /**
+     *  validation
+     */
+    @PostMapping("user")
+    public User user(@RequestBody User user) {
+        System.out.println("user = " + user);
+
+        return user;
     }
 }
